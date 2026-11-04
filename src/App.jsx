@@ -13,19 +13,17 @@ function App() {
   const currencyInfo = useCurrencyInfo(from )
   const options = Object.keys(currencyInfo)
 
-  useEffect(() => {
-    converte();
-  }, [amount, from, to, currencyInfo]);
+  // useEffect(() => {
+  //   if (amount > 0) converte()
+  // }, [amount, from, to, currencyInfo]);
   
   const swap =()=>{
-    const tempFrom = from
-    const tempAmount = amount
 
     setFrom(to)
-    setTo(tempFrom)
+    setTo(from)
     
     setAmount(convertedAmount)
-    setConvertedAmount(tempAmount )
+    setConvertedAmount(amount )
   }
 
   const converte = () => {
@@ -74,6 +72,7 @@ function App() {
                 <div className="relative w-full h-0">
                   <button 
                     onClick={swap}
+                    type="button"
                     className=" flex gap-2 absolute left-1/2 -top-5 -translate-x-1/2 bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 hover:rotate-180 transition-all duration-300">
                     <HiArrowsUpDown size={22} />
                     Swap
@@ -81,9 +80,9 @@ function App() {
                 </div>
                 <InputBox 
                   label="To"
-                  Amount={convertedAmount}
+                  amount={convertedAmount}
                   currencyOptions={options}
-                  onCurrencyChange={(currency)=>{setTo(currency)}}
+                  onCurrencyChange={(currency) => setTo(currency)}
                   selectCurrency={to}
                   amountDisable 
                 />
